@@ -1,9 +1,9 @@
 const express=require("express")
-const {recruiter, jobsList} = require('./connection')
+const {recruiter, jobsList, admin} = require('./connection')
 const passport = require('passport')
 const expressSession = require('express-session')
 const {initializingPassport, isAuthenticated} = require('./passport-config')
-const router = require('./route/router')
+const router = require('./routes/router')
 const app = express()
 
 initializingPassport(passport)

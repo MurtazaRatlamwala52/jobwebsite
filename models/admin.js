@@ -1,9 +1,10 @@
 // const {sequelize, DataTypes} = require('../connection')
+
 const bcrypt = require('bcrypt')
 
 
 module.exports = (sequelize, DataTypes) => {
-const recruiter = sequelize.define('recruiter',{
+const admin = sequelize.define('admin',{
     firstName: {
         type: DataTypes.STRING,
         allowNull: false
@@ -30,8 +31,5 @@ const recruiter = sequelize.define('recruiter',{
 },{
     timestamps: false
 })
-return recruiter
+return admin
 }
-
-// module.exports.recruiter = recruiter
-

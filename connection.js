@@ -19,5 +19,7 @@ sequelize.authenticate().then(()=>{
 
 const recruiter = require('./models/recruiter')( sequelize, DataTypes)
 const jobsList = require('./models/jobsList')( sequelize, DataTypes)
+const admin = require('./models/admin')(sequelize, DataTypes)
 sequelize.sync({alter: true})
-module.exports= {recruiter , jobsList}
+module.exports= {recruiter , jobsList, admin}
+

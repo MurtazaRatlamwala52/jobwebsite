@@ -5,7 +5,7 @@ module.exports={
         res.send(`Welcome ${req.user.dataValues.firstName}`)
     },
     login:(req,res)=>{
-        res.send(`Welcome`)
+        res.send(`Welcome  ${req.user.dataValues.firstName}`)
     },
     adminRecruiter: async (req,res) => {
         const newRecruiter = await recruiter.create({
@@ -29,6 +29,10 @@ module.exports={
             if(err) res.send('This Didnt Work')
             else res.send('Get Lost')
         })
+      },recruiter: async (req, res) => {
+        res.send("Welcome " + req.user.dataValues.firstName)
+      },admin: async (req,res) => {
+        res.send("welcome " + req.user.dataValues.firstName)
       }
 
-}
+      }
