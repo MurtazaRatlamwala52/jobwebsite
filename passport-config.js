@@ -59,7 +59,8 @@ exports.isAuthenticated = (req,res,next) =>{
     res.status(404).send('y thoo...')
 }
 
-exports.isAuthenticatedRecruiter = async (req,res,next) =>{
+exports.isAuthenticatedRecruiter = async (req,res,next) => {
+    if(!req.user) return res.status(401).send('You must be logged in')
     const recruiterr = req.user.dataValues.email
     const exists = await recruiter.findOne({where: {email: recruiterr}})
     // console.log(recruiter)
@@ -68,6 +69,7 @@ exports.isAuthenticatedRecruiter = async (req,res,next) =>{
 }
 
 exports.isAuthenticatedAdmin = async (req,res,next) =>{
+    if(!req.user) return res.status(401).send('You must be logged in')
     const adminn = req.user.dataValues.email
     const exists = await admin.findOne({where: {email: adminn}})
     console.log(adminn)

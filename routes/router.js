@@ -1,5 +1,5 @@
 const passport = require("passport")
-const { welcomePage, jobAdd, login, adminRecruiter, logout, recruiter, admin } = require("../controller/recController")
+const { welcomePage, jobAdd, login, adminRecruiter, logout, recruiter, admin, deleteRecruiter, updateRecruiter, deleteJob } = require("../controller/recController")
 const { isAuthenticated, isAuthenticatedRecruiter, isAuthenticatedAdmin } = require("../passport-config")
 
 const router=require("express").Router()
@@ -11,5 +11,7 @@ router.post("/login",passport.authenticate("local"),login)
 router.post("/admin/recruiter",adminRecruiter)
 router.get("/logout", logout )
 router.get("/admin", isAuthenticatedAdmin, admin)
-
+router.delete("/admin/recruiter/:id", isAuthenticatedAdmin, deleteRecruiter)
+router.put("/admin/recruiter/:id", isAuthenticatedAdmin, updateRecruiter)
+router.delete("/admin/jobs/:id", isAuthenticatedAdmin, deleteJob)
 module.exports=router

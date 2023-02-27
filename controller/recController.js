@@ -33,6 +33,18 @@ module.exports={
         res.send("Welcome " + req.user.dataValues.firstName)
       },admin: async (req,res) => {
         res.send("welcome " + req.user.dataValues.firstName)
+      },deleteRecruiter : async (req,res) => {
+        const rec = await recruiter.findOne({where: {id: req.params.id}})
+        const deleted = await recruiter.destroy({where: {id: req.params.id}})
+        res.send(rec.firstName +" has been successfully deleted from the database") 
+      },updateRecruiter: async function (req, res){
+        const { id } = req.params; 
+        const { firstName, lastName } = req.body; 
+        await recruiter.update({ firstName, lastName },{ where: { id } })
+        res.send('Recruiter Updated')
+      },deleteJob : async (req,res) => {
+        const job = await jobsList.findOne({where: {id: req.params.id}})
+        const deleted = await jobsList.destroy({where: {id: req.params.id}})
+        res.send(job.title +" has been successfully deleted from the database") 
       }
-
-      }
+    }
