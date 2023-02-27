@@ -46,5 +46,27 @@ module.exports={
         const job = await jobsList.findOne({where: {id: req.params.id}})
         const deleted = await jobsList.destroy({where: {id: req.params.id}})
         res.send(job.title +" has been successfully deleted from the database") 
+      },getJob : async (req, res) => {
+
+        const pageAsNumber = Number.parseInt(req.query.page)
+        const sizeAsNumber = Number.parseInt(req.query.size)
+
+        let page = 0
+        if(!Number.isNaN(pageAsNumber) && pageAsNumber > 0){
+          page = pageAsNumber
+        }
+
+        let size = 10
+        if(!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && sizeAsNumber < 10){
+          size = sizeAsNumber
+        }
+        const jobs = await jobsList.findAndCountAll({
+          limit: size, 
+          offset: page * size 
+        })
+        res.send({
+          content: jobs.rows,
+          totalPages: Math.ceil(jobs.count / size)
+        })
       }
     }
